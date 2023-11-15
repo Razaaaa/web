@@ -1,8 +1,8 @@
-# Telemedicine Application - Frontend
+# CureHotline Telemedicine Application - Frontend
 
 This project is the frontend implementation of a Telemedicine application built with React. It includes various features to enhance the user experience and functionality.
 
-## Table of Contents
+## Table of Contentsgit add.
 
 - [Features](#features)
 - [Prerequisites](#prerequisites)
