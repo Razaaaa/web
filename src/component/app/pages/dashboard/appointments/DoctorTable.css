@@ -1,0 +1,111 @@
+.doctor-table-container {
+    margin: 0 auto;
+    text-align: center;
+    padding-top:150px;
+    overflow-x: auto;
+}
+  
+.doctor-table-container h1{
+    font-size: 50px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #ff5722; 
+    text-align: center;
+    font-weight: 700;
+}
+
+.doctor-table {
+  border-collapse: collapse;
+  width: 1150px;
+}
+
+.doctor-table th,
+.doctor-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.doctor-table th {
+  background-color: #f2f2f2;
+}
+
+.doctor-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.doctor-table-container input {
+  width: 300px;
+  padding: 8px;
+  margin: 20px auto;
+  margin-right: 5px;
+  background-color: #eeeeee;
+  color: #000000;
+  border-radius: 20px;
+  border-color: #eeeeee;
+}
+
+.doctor-table-container button {
+  background-color: #ff5722;
+  color: #fff;
+  border-radius: 20px;
+  border-color: #ff5722;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.doctor-table-container button:hover{
+  background-color: #a3310f;
+  border-color: #a3310f;
+}
+
+.booking-form {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 20px;
+  text-align: center;
+  background-color: #f2f2f2;
+}
+
+@media(max-width:1360px){
+  .doctor-table {
+    width: 800px;
+  }
+}
+@media(max-width:990px){
+  .doctor-table {
+    width: 500px;
+    margin-left:100px;
+  }
+  .doctor-table-container h1{
+    font-size: 40px;
+  }
+  .doctor-table-container input {
+    width: 200px;
+  }
+  
+  .doctor-table-container button {
+    width:120px;
+    font-size:14px;
+  }
+
+}
+@media(max-width:600px){
+  .doctor-table {
+    width: 350px;
+    margin-left:100px;
+  }
+  .doctor-table-container h1{
+    font-size: 28px;
+    margin-left:100px;
+  }
+  .doctor-table-container input {
+    width: 150px;
+    display: block;
+    margin:0 auto;
+    margin-top:10px;
+    margin-bottom:10px;
+  }
+}
+
+
