@@ -35,16 +35,6 @@
 	text-align: center;
 }
 
-
-.sign-form p {
-	font-size: 16px;
-	font-weight: 100;
-	line-height: 20px;
-	letter-spacing: 0.5px;
-	margin: 0px;
-	
-}
-
 .sign-form span {
 	font-size: 12px;
 }
@@ -153,13 +143,14 @@ button.ghost {
 	width: 40px;
 }
 
-#red-error{
-	line-height: 0px;
+.red-error{
+	line-height: 4px;
 	color:rgb(255, 60, 0);
 	margin:0px;
 	font-size: 12px;
 	padding: 0px;
 }
+
 @media(max-width:630px){
 	.sign-body {
 		width: 420px;

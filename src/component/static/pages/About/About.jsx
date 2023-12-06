@@ -1,6 +1,6 @@
 import React from 'react'
 import './About.css'
-import myLogo from 'C:/Users/Dawood/Desktop/web-project/src/assets/img/me.jpg'
+import myLogo from 'D:/MERN/web-project/src/assets/img/me.jpg'
 
 const About = () => {
   return (

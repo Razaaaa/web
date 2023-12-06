@@ -1,7 +1,7 @@
 import React from 'react'
 import Login_nav_bar from './LoginNavbar'
 import Side_bar from './Sidebar'
-import Foot_bar from './Footer'
+import Foot_bar from './FooterDashboard'
 import { Outlet } from 'react-router-dom'
 
 const DashboardLayout = () => {

@@ -31,7 +31,6 @@
 	font-weight: 100;
 	line-height: 20px;
 	letter-spacing: 0.5px;
-	margin: 20px 0 30px;
 }
 
 .contact-body span {
@@ -138,4 +137,10 @@
 	.contact-body {
 		width: 330px;
 	}
+}
+
+.error-message{
+	margin:0px;
+	padding:0px;
+	color:#ff5722;
 }

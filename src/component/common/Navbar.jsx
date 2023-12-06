@@ -2,7 +2,7 @@ import React from 'react'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import myLogo from 'C:/Users/Dawood/Desktop/web-project/src/assets/img/cure-logo2.png'
+import myLogo from 'D:/MERN/web-project/src/assets/img/cure-logo2.png'
 import { Link } from 'react-router-dom';
 
 const Header =() => {

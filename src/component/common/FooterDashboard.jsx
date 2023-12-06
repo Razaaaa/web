@@ -1,9 +1,10 @@
 import React from 'react'
 import { MDBBtn, MDBIcon } from 'mdb-react-ui-kit'
 
+
 const Footer = () => {
   return (
-    <div className="footer">
+    <div className="footer-dash">
 
       <p>© 2023 — All right Reserved@CureHotline</p>
       <div className="social">

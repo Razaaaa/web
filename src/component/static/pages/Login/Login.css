@@ -36,13 +36,7 @@
 }
 
 
-.login-form p {
-	font-size: 16px;
-	font-weight: 100;
-	line-height: 20px;
-	letter-spacing: 0.5px;
-	margin: 20px 0 30px;
-}
+
 
 .login-form span {
 	font-size: 12px;
@@ -256,11 +250,13 @@
 	width: 40px;
 }
 
-#red-error{
-	line-height: 0px;
+.red-error{
+	line-height: 4px;
 	color:rgb(255, 60, 0);
-	margin:5px;
+	margin-top:5px;
+	margin-bottom:15px;
 	font-size: 12px;
+	padding: 0px;
 }
 
 @media(max-width:930px){

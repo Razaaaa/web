@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "./DoctorTable.css"; // Import your CSS file
+import "./DoctorTable.css";
+import { Link, Navigate } from "react-router-dom";
 
 function BookAppointments() {
   const [doctors, setDoctors] = useState([
@@ -29,10 +30,6 @@ function BookAppointments() {
 
   const handleSpecialtyFilterChange = (e) => {
     setFilterSpecialty(e.target.value);
-  };
-
-  const handleBookAppointment = (doctor) => {
-    window.location.href = "https://meet.google.com/";
   };
 
   return (
@@ -71,9 +68,9 @@ function BookAppointments() {
                 <td>{doctor.name}</td>
                 <td>{doctor.specialty}</td>
                 <td>
-                  <button onClick={() => handleBookAppointment(doctor)}>
+                  <Link to='/order'><button>
                     Book Appointment
-                  </button>
+                  </button></Link>
                 </td>
               </tr>
             ))}
