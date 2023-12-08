@@ -6,9 +6,11 @@ const dbConnection = require ("./db/conection")
 const contactModel = require("./model/contact.model")
 const signupModel = require("./model/signup.model")
 const orderModel = require("./model/order_payment.model")
+const doctorModel = require("./model/doctor.model")
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const moment = require("moment");
+
 
 
 
@@ -152,8 +154,6 @@ app.put('/profile/:id', async (req, res) => {
     const userId = req.params.id;
     console.log(userId);
     const updatedData = req.body;
-     // Assuming you're sending the updated data in the request body
-    // Update the user profile data in the database
     const updatedUserProfile = await signupModel.findByIdAndUpdate(userId, updatedData, { new: true });
 
     res.json(updatedUserProfile);
@@ -163,15 +163,15 @@ app.put('/profile/:id', async (req, res) => {
   }
 });
 
-//post api for confirming consultation
 app.post('/order', async (req, res) => {
   try {
-    const {doctorname, consultationdate, consultationtime, reason } = req.body;
+    const { doctorname, consultationdate, consultationtime, reason, userId } = req.body;
 
     const newOrder = new orderModel({
-      doctorname, 
-      consultationdate, 
-      consultationtime, 
+      userId,
+      doctorname,
+      consultationdate,
+      consultationtime,
       reason,
     });
 
@@ -179,11 +179,10 @@ app.post('/order', async (req, res) => {
 
     res.status(201).json(savedOrder);
   } catch (error) {
-    console.error('Error creating user:', error);
+    console.error('Error creating order:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
 
 app.get('/order/:id', async (req, res) => {
   try {
@@ -195,4 +194,34 @@ app.get('/order/:id', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+app.post("/doctorData", async (req, res) => {
+  try {
+    const { name, specialization } = req.body;
+    const newDoctor = new doctorModel({
+      name,
+      specialization,
+    });
+
+    const savedDoctor = await newDoctor.save();
+   
+    console.log(name);
+    console.log(specialization)
+    res.status(201).json(savedDoctor);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+app.get('/doctorData', async (req, res) => {
+  try {
+    const newDoctor = await doctorModel.find({});
+    res.status(200).json(newDoctor);
+  } catch (error) {
+    res.status(500).json({ error: 'Data not available' });
+  }
+})
+
+
 

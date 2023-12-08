@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import './Payment.css';
 import { jwtDecode } from "jwt-decode";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CurrentAppointments = () => {
   const [userOrders, setUserOrders] = useState([]);
 
   useEffect(() => {
-    // Fetch user orders when the component mounts
     fetchUserOrders();
   }, []);
 
@@ -35,8 +36,9 @@ const CurrentAppointments = () => {
     } catch (error) {
       console.error(error);
     }
-  };
 
+  };
+    
   return (
     <div className="appointment-table-container">
       <h1>Your Upcoming Appointments</h1>
@@ -57,8 +59,11 @@ const CurrentAppointments = () => {
               <td>{order.consultationdate}</td>
               <td>{order.doctorname}</td>
               <td>{order.reason}</td>
-              {/* Assuming the meet link is stored in the order model */}
-              <td>{order.meetlink}</td>
+              <td>
+                <a href={`https://meet.google.com/`} target="_blank" rel="noopener noreferrer">
+                  Join Google Meet
+                </a>
+              </td>
             </tr>
           ))}
         </tbody>

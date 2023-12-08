@@ -1,14 +1,41 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Payment.css';
-const Payments = () => {
+import { jwtDecode } from "jwt-decode";
 
-  const appointments = [
-    { time: "9:00 AM", date:"11-11-2023", doctor: "Dr. Smith", reason:"Svere Fever", fee:"Rs.5000" },
-    { time: "10:00 AM", date:"21-11-2023", doctor: "Dr. Smith", reason:"Heacahe", fee:"Rs.4000" },
-    { time: "11:00 AM", date:"1-12-2023", doctor: "Dr. Smith", reason:"Muscle pain", fee:"Rs.3000" },
-    { time: "12:00 PM", date:"15-12-2023", doctor: "Dr. Smith", reason:"Back pain", fee:"Rs.2500" },
-    { time: "15:00 PM", date:"31-12-2023", doctor: "Dr. Smith", reason:"Thyroid Checkup", fee:"Rs.1000" }
-  ];
+
+const Payments = () => {
+  const [userOrders, setUserOrders] = useState([]);
+
+  useEffect(() => {
+    fetchUserOrders();
+  }, []);
+
+  const fetchUserOrders = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const decoded = jwtDecode(token);
+
+      console.log("decoded token", decoded);
+
+      const apiUrl = `http://localhost:8082/order/${decoded.user_id}`;
+
+      const response = await fetch(apiUrl, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch user orders');
+      }
+
+      const data = await response.json();
+      setUserOrders(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="appointment-table-container">
@@ -24,13 +51,13 @@ const Payments = () => {
           </tr>
         </thead>
         <tbody>
-          {appointments.map((appointment, index) => (
+          {userOrders.map((order, index) => (
             <tr key={index}>
-              <td>{appointment.time}</td>
-              <td>{appointment.date}</td>
-              <td>{appointment.doctor}</td>
-              <td>{appointment.reason}</td>
-              <td>{appointment.fee}</td>
+              <td>{order.consultationtime}</td>
+              <td>{order.consultationdate}</td>
+              <td>{order.doctorname}</td>
+              <td>{order.reason}</td>
+              <td>{4000}</td>
             </tr>
           ))}
         </tbody>
@@ -40,3 +67,4 @@ const Payments = () => {
 }
 
 export default Payments
+

@@ -16,6 +16,8 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { jwtDecode } from "jwt-decode";
+import { toast } from 'react-toastify';
     
 export default function Order() {
   const navigate = useNavigate()
@@ -28,29 +30,46 @@ export default function Order() {
       reason: yup.string().required('Enter a Reason'),
     });
   
-    const {
-      register,
-      handleSubmit,
-      formState: { errors },
-      reset,
-    } = useForm({
-      resolver: yupResolver(schema),
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(schema),
   });
 
-  const handleFormSubmit = (data) => {
-   
+  const handleFormSubmit = async (data) => {
     try {
-      axios.post("http://localhost:8082/order",data)
-      navigate('/users/dashboard');
-      reset();
-      
+      const token = localStorage.getItem("token");
+      const decoded = jwtDecode(token);
+
+      console.log("decoded token", decoded);
+
+      const apiUrl = `http://localhost:8082/order/${decoded.user_id}`;
+      const response = await fetch(apiUrl, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+      });
+
+      axios.post("http://localhost:8082/order", { ...data, userId: decoded.user_id })
+        .then(response => {
+          console.log(response.data);
+          toast.success("Payment Successfull")
+          navigate('/users/dashboard');
+          reset();
+        })
+        .catch(error => {
+          console.error(error);
+        });
     } catch (error) {
-    console.log(data)
-      
+      console.log(error);
     }
   };
-  
-    return (
+
+  return (
     <section className="h-100 h-custom" style={{ backgroundColor: "#eee" }}>
       <MDBContainer className="py-5 h-100">
         <MDBRow className="justify-content-center align-items-center h-100">
@@ -66,9 +85,6 @@ export default function Order() {
                     </MDBTypography>
     
                     <hr />
-    
-                
-    
                     <MDBCard className="mb-3">
                       <MDBCardBody>
                         <div className="d-flex justify-content-between">
@@ -156,11 +172,6 @@ export default function Order() {
                                 maxLength="3" placeholder="&#9679;&#9679;&#9679;" contrast />
                             </MDBCol>
                           </MDBRow>
-                          <button type="submit">Checkout</button>
-                        </form>
-    
-                        <hr />
-    
                         <div className="d-flex justify-content-between">
                           <p className="mb-2">Subtotal</p>
                           <p className="mb-2">Rs.4000</p>
@@ -175,15 +186,12 @@ export default function Order() {
                           <p className="mb-2">Total(Incl. taxes)</p>
                           <p className="mb-2">Rs.4280</p>
                         </div>
+                          <button className="order-btn" type="submit">Checkout</button>
+                        </form>
     
-                        <MDBBtn color="info" block size="lg">
-                          <div className="d-flex justify-content-between">
-                            <span>
-                              
-                              <i className="fas fa-long-arrow-alt-right ms-2"></i>
-                            </span>
-                          </div>
-                        </MDBBtn>
+                        <hr />
+    
+                    
                       </MDBCardBody>
                     </MDBCard>
                   </MDBCol>
@@ -195,4 +203,4 @@ export default function Order() {
       </MDBContainer>
     </section>
     );
-    }
+  }
